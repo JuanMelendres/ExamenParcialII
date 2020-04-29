@@ -1,4 +1,4 @@
-package com.itesm.examenii;
+package com.example.activity21;
 
 import org.junit.Test;
 

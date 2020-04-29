@@ -1,4 +1,4 @@
-package com.itesm.examenii;
+package com.example.activity21;
 
 import android.content.Context;
 
@@ -22,6 +22,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
 
-        assertEquals("com.itesm.examenii", appContext.getPackageName());
+        assertEquals("com.example.activity21", appContext.getPackageName());
     }
 }
