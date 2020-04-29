@@ -10,4 +10,4 @@
 
 4. Cada renglón de la recycler view tendrá 2 botones, además de mostrar el nombre y peso del perrito en cuestión. Al presionar el primer botón se mostrará el mensaje “PERRITO” + nombre del perrito en un toast. Al presionar el segundo botón se mostrará “PESO” + el peso del perrito en otro toast.
 
-5. Crea un adaptador para utilizar en la recycler view que sea capaz de interpretar el JSONObject obtenido del request y lo traslade correctamente a interfaz gráfica
+5. Crea un adaptador para utilizar en la recycler view que sea capaz de interpretar el JSONObject obtenido del request y lo traslade correctamente a interfaz gráfica.
