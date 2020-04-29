@@ -12,8 +12,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
 import android.widget.Toast;
 
 import org.json.JSONArray;
@@ -24,7 +22,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity implements Handler.Callback, View.OnClickListener {
 
     private Handler dataHandler;
-    ArrayList<Friend> friendsArray;
+    ArrayList<Dog> friendsArray;
     private RecyclerView rvFriendsList;
     JSONArray datos;
     @Override
@@ -36,7 +34,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
     }
     public void request(View v){
 
-        Request r = new Request("https://api.jsonbin.io/b/5ea8882107d49135ba474409/2", dataHandler);
+        Request r = new Request("https://api.jsonbin.io/b/5ea9743566e603359fe0b477", dataHandler);
         r.start();
     }
 
@@ -46,16 +44,13 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
         datos = (JSONArray) msg.obj;
         try{
             for (int i=0; i<datos.length();i++) {
-                Friend newFriend = new Friend();
-                newFriend.setName(datos.getJSONObject(i).getString("name"));
-                newFriend.setHobby(datos.getJSONObject(i).getString("hobby"));
-                newFriend.setAge(datos.getJSONObject(i).getString("age"));
-                newFriend.setPhone(datos.getJSONObject(i).getString("phone"));
-                newFriend.setAddress(datos.getJSONObject(i).getString("address"));
-                friendsArray.add(newFriend);
+                Dog newDog = new Dog();
+                newDog.setPerrito(datos.getJSONObject(i).getString("perrito"));
+                newDog.setPeso(datos.getJSONObject(i).getString("peso"));
+                friendsArray.add(newDog);
                 //Toast.makeText(this, datos.getJSONObject(i).toString(), Toast.LENGTH_SHORT).show();
             }
-            FriendAdapter friendAdapter = new FriendAdapter(friendsArray, this);
+            DogAdapter dogAdapter = new DogAdapter(friendsArray, this);
             LinearLayoutManager llm = new LinearLayoutManager(this);
             llm.setOrientation(LinearLayoutManager.VERTICAL);
 
@@ -63,7 +58,7 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
 
 
             rvFriendsList.setLayoutManager(llm);
-            rvFriendsList.setAdapter(friendAdapter);
+            rvFriendsList.setAdapter(dogAdapter);
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -71,31 +66,17 @@ public class MainActivity extends AppCompatActivity implements Handler.Callback,
     }
     @Override
     public void onClick(View v) {
-
+        /*
         int pos = rvFriendsList.getChildLayoutPosition(v);
-        Intent showFriendInfo = new Intent(this, FriendInfo.class);
-        showFriendInfo.putExtra("name", friendsArray.get(pos).getName());
-        showFriendInfo.putExtra("hobby", friendsArray.get(pos).getHobby());
-        showFriendInfo.putExtra("age", friendsArray.get(pos).getAge());
-        showFriendInfo.putExtra("phone", friendsArray.get(pos).getPhone());
-        showFriendInfo.putExtra("address", friendsArray.get(pos).getAddress());
+        Intent showDogInfo = new Intent(this, FriendInfo.class);
+        showDogInfo.putExtra("perrito", friendsArray.get(pos).getPerrito());
+        showDogInfo.putExtra("peso", friendsArray.get(pos).getPeso());
 
-        startActivity(showFriendInfo);
+        startActivity(showDogInfo);
         try {
-            Toast.makeText(this, datos.getJSONObject(pos).getString("name"), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, datos.getJSONObject(pos).getString("perrito"), Toast.LENGTH_SHORT).show();
         } catch (JSONException e) {
             e.printStackTrace();
-        }
+        }*/
     }
-    /*@Override
-    public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-        Intent showFriendInfo = new Intent(this, FriendInfo.class);
-        showFriendInfo.putExtra("name", friendsArray.get(i).getName());
-        showFriendInfo.putExtra("hobby", friendsArray.get(i).getHobby());
-        showFriendInfo.putExtra("age", friendsArray.get(i).getAge());
-        showFriendInfo.putExtra("phone", friendsArray.get(i).getPhone());
-        showFriendInfo.putExtra("address", friendsArray.get(i).getAddress());
-
-        startActivity(showFriendInfo);
-    }*/
 }
